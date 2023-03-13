@@ -21,7 +21,7 @@ Blockly.Python['puppy_pid_front_setpin'] = function(block) {
   var dropdown_s6_pin = block.getFieldValue('s6_pin');
   var dropdown_s7_pin = block.getFieldValue('s7_pin');
 
-  var code = `PuppyBotEx.set_pinSensor("${dropdown_color}", [ ${dropdown_s0_pin}, ${dropdown_s1_pin}, ${dropdown_s2_pin}, ${dropdown_s3_pin}, ${dropdown_s4_pin}, ${dropdown_s5_pin}, ${dropdown_s6_pin}, ${dropdown_s7_pin} ])\n`;
+  var code = `PuppyBotEx.set_pinSensor([ ${dropdown_s0_pin}, ${dropdown_s1_pin}, ${dropdown_s2_pin}, ${dropdown_s3_pin}, ${dropdown_s4_pin}, ${dropdown_s5_pin}, ${dropdown_s6_pin}, ${dropdown_s7_pin} ], "${dropdown_color}")\n`;
   return code;
 };
 
