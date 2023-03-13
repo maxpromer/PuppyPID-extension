@@ -35,7 +35,7 @@ Blockly.Python['puppy_pid_front_setmin'] = function(block) {
   var value_s6 = Blockly.Python.valueToCode(block, 's6', Blockly.Python.ORDER_ATOMIC);
   var value_s7 = Blockly.Python.valueToCode(block, 's7', Blockly.Python.ORDER_ATOMIC);
 
-  var code = `PuppyBotEx.set_min_sensor([ ${value_s0}, ${value_s1}, ${value_s2}, ${value_s3}, ${value_s4}, ${value_s5}, ${value_s6}, ${value_s7}, ${value_s8} ])\n`;
+  var code = `PuppyBotEx.set_min_sensor([ ${value_s0}, ${value_s1}, ${value_s2}, ${value_s3}, ${value_s4}, ${value_s5}, ${value_s6}, ${value_s7} ])\n`;
   return code;
 };
 
@@ -49,7 +49,7 @@ Blockly.Python['puppy_pid_front_setmax'] = function(block) {
   var value_s6 = Blockly.Python.valueToCode(block, 's6', Blockly.Python.ORDER_ATOMIC);
   var value_s7 = Blockly.Python.valueToCode(block, 's7', Blockly.Python.ORDER_ATOMIC);
 
-  var code = `PuppyBotEx.set_max_sensor([ ${value_s0}, ${value_s1}, ${value_s2}, ${value_s3}, ${value_s4}, ${value_s5}, ${value_s6}, ${value_s7}, ${value_s8} ])\n`;
+  var code = `PuppyBotEx.set_max_sensor([ ${value_s0}, ${value_s1}, ${value_s2}, ${value_s3}, ${value_s4}, ${value_s5}, ${value_s6}, ${value_s7} ])\n`;
   return code;
 };
 
