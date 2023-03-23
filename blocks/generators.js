@@ -1,13 +1,3 @@
-Blockly.Python['sht30_read'] = function (block) {
-  Blockly.Python.definitions_['import_SHT30'] = 'import SHT30';
-
-  var dropdown_addr = block.getFieldValue('addr');
-  var dropdown_type = block.getFieldValue('type');
-
-  var code = `SHT30.read(${dropdown_addr})[${dropdown_type}]`;
-  return [code, Blockly.Python.ORDER_NONE];
-};
-
 Blockly.Python['puppy_pid_front_setpin'] = function(block) {
   Blockly.Python.definitions_['from_PuppyBotEx_import_PuppyBotEx'] = 'from PuppyBotEx import PuppyBotEx';
 
@@ -21,7 +11,18 @@ Blockly.Python['puppy_pid_front_setpin'] = function(block) {
   var dropdown_s6_pin = block.getFieldValue('s6_pin');
   var dropdown_s7_pin = block.getFieldValue('s7_pin');
 
-  var code = `PuppyBotEx.set_pinSensor([ ${dropdown_s0_pin}, ${dropdown_s1_pin}, ${dropdown_s2_pin}, ${dropdown_s3_pin}, ${dropdown_s4_pin}, ${dropdown_s5_pin}, ${dropdown_s6_pin}, ${dropdown_s7_pin} ], "${dropdown_color}")\n`;
+  
+  let pin = [];
+  for (let i=0;i<8;i++) {
+    const value = block.getFieldValue(`s${i}_pin`);
+    if (value !== "None") {
+      pin.push(value);
+    } else {
+      break;
+    }
+  }
+
+  var code = `PuppyBotEx.set_pinSensor([ ${pin.join(", ")} ], "${dropdown_color}")\n`;
   return code;
 };
 

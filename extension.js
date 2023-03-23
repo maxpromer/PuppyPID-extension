@@ -3,7 +3,7 @@
     description: "PID line following for PuppyBot",
     author: "PrinceBot",
     category: "Sensors",
-    version: "1.0.0",
+    version: "1.0.1",
     icon: "/static/icon.png", // Category icon
     color: "#28B463", // Category color (recommend some blocks color)
     blocks: [ // Blocks in Category
