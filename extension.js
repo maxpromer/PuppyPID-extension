@@ -3,7 +3,7 @@
     description: "PID line following for PuppyBot",
     author: "PrinceBot",
     category: "Sensors",
-    version: "1.0.1",
+    version: "1.1.0",
     icon: "/static/icon.png", // Category icon
     color: "#28B463", // Category color (recommend some blocks color)
     blocks: [ // Blocks in Category
@@ -39,6 +39,15 @@
         {
             xml: `
                 <block type="puppy_pid_front_run_pid">
+                    <value name="speed"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+                    <value name="kp"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                    <value name="kd"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                </block>
+            `
+        },
+        {
+            xml: `
+                <block type="puppy_pid_front_run_pid_4wd">
                     <value name="speed"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
                     <value name="kp"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
                     <value name="kd"><shadow type="math_number"><field name="NUM">0</field></shadow></value>

@@ -17,15 +17,24 @@ class puppybot():
         self.previous_error = 0
         self.sensor_detect_color = ''
         self.numSensor= 0
+        self.pwmM1A = PWM(Pin(1))
+        self.pwmM1B = PWM(Pin(0))
+        self.pwmM2A = PWM(Pin(3))
+        self.pwmM2B = PWM(Pin(2))
+        self.pwmM3A = PWM(Pin(10))
+        self.pwmM3B = PWM(Pin(11))
+        self.pwmM4A = PWM(Pin(8))
+        self.pwmM4B = PWM(Pin(9))
+        self.pwmM1A.freq(1000)
+        self.pwmM1B.freq(1000)
+        self.pwmM2A.freq(1000)
+        self.pwmM2B.freq(1000)
+        self.pwmM3A.freq(1000)
+        self.pwmM3B.freq(1000)
+        self.pwmM4A.freq(1000)
+        self.pwmM4B.freq(1000)
+
     def motor(self,pin_motor_,direct_motor,speed_motor):
-        pwmM1A = PWM(Pin(1))
-        pwmM1B = PWM(Pin(0))
-        pwmM2A = PWM(Pin(3))
-        pwmM2B = PWM(Pin(2))
-        pwmM1A.freq(1000)
-        pwmM1B.freq(1000)
-        pwmM2A.freq(1000)
-        pwmM2B.freq(1000)
         if(speed_motor > 100):
             speed_motor = 100
         elif(speed_motor <= 0):
@@ -33,25 +42,38 @@ class puppybot():
         speed_motor = speed_motor * 655
         if(pin_motor_ == 1):
             if(direct_motor == 1):
-                pwmM1A.duty_u16(65535-speed_motor)
-                pwmM1B.duty_u16(65535)
+                self.pwmM1A.duty_u16(65535-speed_motor)
+                self.pwmM1B.duty_u16(65535)
             elif(direct_motor == 2):
-                pwmM1A.duty_u16(65535)
-                pwmM1B.duty_u16(65535-speed_motor)
+                self.pwmM1A.duty_u16(65535)
+                self.pwmM1B.duty_u16(65535-speed_motor)
         elif(pin_motor_ == 2):
             if(direct_motor == 1):
-                pwmM2A.duty_u16(65535-speed_motor)
-                pwmM2B.duty_u16(65535)
+                self.pwmM2A.duty_u16(65535-speed_motor)
+                self.pwmM2B.duty_u16(65535)
             elif(direct_motor == 2):
-                pwmM2A.duty_u16(65535)
-                pwmM2B.duty_u16(65535-speed_motor)
+                self.pwmM2A.duty_u16(65535)
+                self.pwmM2B.duty_u16(65535-speed_motor)
+        elif(pin_motor_ == 3):
+            if(direct_motor == 1):
+                self.pwmM3A.duty_u16(65535-speed_motor)
+                self.pwmM3B.duty_u16(65535)
+            elif(direct_motor == 2):
+                self.pwmM3A.duty_u16(65535)
+                self.pwmM3B.duty_u16(65535-speed_motor)
+        elif(pin_motor_ == 4):
+            if(direct_motor == 1):
+                self.pwmM4A.duty_u16(65535-speed_motor)
+                self.pwmM4B.duty_u16(65535)
+            elif(direct_motor == 2):
+                self.pwmM4A.duty_u16(65535)
+                self.pwmM4B.duty_u16(65535-speed_motor)
     def motor2(self,ch,speed_motor):
         if speed_motor <0:
             self.motor(ch,2,abs(speed_motor))
         elif speed_motor >= 0:
             self.motor(ch,1,abs(speed_motor))
-        
-        
+    
     def ADC(self,ch):
         if ch < 8:
             muxCH = [[0,1,0],[1,0,0],[0,0,0],[1,1,0],[0,0,1],[0,1,1],[1,1,1],[1,0,1]]
@@ -132,6 +154,21 @@ class puppybot():
         m2Speed = RUN_PID_speed - output
         self.motor2(1,int(m1Speed))
         self.motor2(2,int(m2Speed))
+        self.previous_error = errors
+
+    def lineFollowing_4wd(self,RUN_PID_speed,RUN_PID_KP,RUN_PID_KD):
+        #global previous_error,numSensor
+        present_position = self.readLine()
+        setpoint = ((self.numSensor - 1) * 100) / 2
+        errors = present_position - setpoint
+        derivative = (errors - self.previous_error)
+        output = RUN_PID_KP * errors  + RUN_PID_KD * derivative
+        m1Speed = RUN_PID_speed + output
+        m2Speed = RUN_PID_speed - output
+        self.motor2(1,int(m1Speed))
+        self.motor2(2,int(m2Speed))
+        self.motor2(3,int(m1Speed))
+        self.motor2(4,int(m2Speed))
         self.previous_error = errors
 
 PuppyBotEx = puppybot()

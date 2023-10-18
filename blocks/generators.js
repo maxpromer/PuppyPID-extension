@@ -63,6 +63,15 @@ Blockly.Python['puppy_pid_front_run_pid'] = function(block) {
   return code;
 };
 
+Blockly.Python['puppy_pid_front_run_pid_4wd'] = function(block) {
+  var value_speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var value_kp = Blockly.Python.valueToCode(block, 'kp', Blockly.Python.ORDER_ATOMIC);
+  var value_kd = Blockly.Python.valueToCode(block, 'kd', Blockly.Python.ORDER_ATOMIC);
+
+  var code = `PuppyBotEx.lineFollowing_4wd(${value_speed}, ${value_kp}, ${value_kd})\n`;
+  return code;
+};
+
 Blockly.Python['puppy_pid_front_read_line'] = function(block) {
   var code = 'PuppyBotEx.readLine()';
 

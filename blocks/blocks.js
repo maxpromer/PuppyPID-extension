@@ -491,6 +491,33 @@ Blockly.defineBlocksWithJsonArray([{
   "helpUrl": ""
 },
 {
+  "type": "puppy_pid_front_run_pid_4wd",
+  "message0": "Front_Run_PD (4WD)  Speed: %1 KP: %2 KD: %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "speed",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "kp",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "kd",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#28B463",
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
   "type": "puppy_pid_front_read_line",
   "message0": "Front_PID_readLine",
   "inputsInline": true,
